@@ -11,6 +11,8 @@ interface CalendarSectionProps {
   brideName: string;
 }
 
+const EASE_ELEGANT: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 export default function CalendarSection({ date, groomName, brideName }: CalendarSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -23,6 +25,7 @@ export default function CalendarSection({ date, groomName, brideName }: Calendar
   const year = date.getFullYear();
   const month = date.getMonth();
   const targetDay = date.getDate();
+  const dayOfWeek = date.getDay();
   
   const firstDayOfMonth = new Date(year, month, 1).getDay();
   const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
@@ -36,93 +39,117 @@ export default function CalendarSection({ date, groomName, brideName }: Calendar
   }
 
   const dayNames = ['일', '월', '화', '수', '목', '금', '토'];
-  const monthNames = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+  const dayNamesEn = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: EASE_ELEGANT },
+    },
+  };
 
   return (
-    <section ref={ref} className="py-20 px-6 bg-[var(--color-bg)] paper-texture">
+    <section ref={ref} className="py-20 px-6 bg-[var(--color-bg-secondary)] paper-texture">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="text-center"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
       >
-        <p className="section-title mb-3">CALENDAR</p>
-        <h2 className="font-[family-name:var(--font-heading)] mb-8">
-          {year}년 {monthNames[month]}월
-        </h2>
+        <motion.div variants={itemVariants} className="text-center mb-8">
+          <p className="section-title mb-6">CALENDAR</p>
+          
+          <p className="font-mono text-[10px] tracking-[0.4em] text-[var(--color-text-muted)] mb-2">
+            {dayNamesEn[dayOfWeek]}
+          </p>
+          <motion.p 
+            className="font-display text-[100px] leading-none tracking-[-0.03em] text-[var(--color-text)]"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.3, duration: 0.8, ease: EASE_ELEGANT }}
+          >
+            {String(targetDay).padStart(2, '0')}
+          </motion.p>
+          <p className="font-display text-[24px] mt-2 text-[var(--color-text-light)]">
+            {monthNames[month]} {year}
+          </p>
+        </motion.div>
 
-        <div className="max-w-xs mx-auto">
-          <div className="grid grid-cols-7 gap-1 mb-2">
-            {dayNames.map((day, idx) => (
-              <div
-                key={day}
-                className={`text-xs py-2 ${
-                  idx === 0 ? 'text-[var(--color-accent)]' : idx === 6 ? 'text-[var(--color-groom)]' : 'text-[var(--color-text-light)]'
-                }`}
-              >
-                {day}
-              </div>
-            ))}
-          </div>
+        <motion.div variants={itemVariants} className="max-w-[280px] mx-auto mb-10">
+          <div className="border-t border-b border-[var(--color-border)] py-4">
+            <div className="grid grid-cols-7 gap-0 mb-3">
+              {dayNames.map((day, idx) => (
+                <div
+                  key={day}
+                  className={`text-[10px] text-center font-mono tracking-wider ${
+                    idx === 0 ? 'text-[var(--color-accent-dark)]' : idx === 6 ? 'text-[var(--color-groom)]' : 'text-[var(--color-text-muted)]'
+                  }`}
+                >
+                  {day}
+                </div>
+              ))}
+            </div>
 
-          <div className="grid grid-cols-7 gap-1">
-            {days.map((day, idx) => (
-              <div
-                key={idx}
-                className={`relative aspect-square flex items-center justify-center text-sm
-                  ${day === targetDay ? 'text-white' : ''}
-                  ${idx % 7 === 0 && day !== targetDay ? 'text-[var(--color-accent)]' : ''}
-                  ${idx % 7 === 6 && day !== targetDay ? 'text-[var(--color-groom)]' : ''}
-                `}
-              >
-                {day === targetDay && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : {}}
-                    transition={{ delay: 0.5, type: "spring" }}
-                    className="absolute inset-1 bg-[var(--color-accent)] rounded-full"
-                  />
-                )}
-                <span className="relative z-10">{day}</span>
-                {day === targetDay && (
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: [1, 1.3, 1] } : {}}
-                    transition={{ delay: 0.8, duration: 0.6 }}
-                    className="absolute -bottom-1 text-[8px] text-[var(--color-accent)]"
-                  >
-                    ♥
-                  </motion.div>
-                )}
-              </div>
-            ))}
+            <div className="grid grid-cols-7 gap-0">
+              {days.map((day, idx) => (
+                <div
+                  key={idx}
+                  className={`relative aspect-square flex items-center justify-center text-[12px]
+                    ${day === targetDay ? 'text-white font-medium' : ''}
+                    ${idx % 7 === 0 && day !== targetDay ? 'text-[var(--color-accent-dark)]' : ''}
+                    ${idx % 7 === 6 && day !== targetDay ? 'text-[var(--color-groom)]' : ''}
+                    ${day && day !== targetDay ? 'text-[var(--color-text-light)]' : ''}
+                  `}
+                >
+                  {day === targetDay && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={isInView ? { scale: 1 } : {}}
+                      transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
+                      className="absolute inset-1 bg-[var(--color-accent)] rounded-full"
+                    />
+                  )}
+                  <span className="relative z-10">{day}</span>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-10 py-5 px-8 border border-[var(--color-border)] rounded-2xl inline-block bg-white/50"
+          variants={itemVariants}
+          className="text-center"
         >
-          <p className="text-sm text-[var(--color-text-light)] mb-2">
-            {groomName} <span className="text-[var(--color-accent)]">♥</span> {brideName}의 결혼식
-          </p>
-          <p className="font-[family-name:var(--font-heading)] text-[var(--color-primary)]">
-            {dday > 0 ? (
-              <>
-                <span className="text-3xl font-medium">{dday}</span>
-                <span className="text-sm ml-1.5">일 전</span>
-              </>
-            ) : dday === 0 ? (
-              <span className="text-2xl">오늘이에요!</span>
-            ) : (
-              <>
-                <span className="text-3xl font-medium">{Math.abs(dday)}</span>
-                <span className="text-sm ml-1.5">일이 지났습니다</span>
-              </>
-            )}
-          </p>
+          <div className="inline-block px-8 py-5 bg-white shadow-editorial">
+            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-text-muted)] mb-3">
+              {groomName} & {brideName}
+            </p>
+            <p className="font-display text-[var(--color-primary)]">
+              {dday > 0 ? (
+                <>
+                  <span className="text-[36px] tracking-[-0.02em]">{dday}</span>
+                  <span className="text-[14px] ml-2 text-[var(--color-text-light)]">days to go</span>
+                </>
+              ) : dday === 0 ? (
+                <span className="text-[24px]">Today is the day</span>
+              ) : (
+                <>
+                  <span className="text-[36px] tracking-[-0.02em]">{Math.abs(dday)}</span>
+                  <span className="text-[14px] ml-2 text-[var(--color-text-light)]">days ago</span>
+                </>
+              )}
+            </p>
+          </div>
         </motion.div>
       </motion.div>
     </section>

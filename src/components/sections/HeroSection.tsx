@@ -12,6 +12,8 @@ interface HeroSectionProps {
   mainImage?: string;
 }
 
+const EASE_ELEGANT: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 export default function HeroSection({
   groomName,
   brideName,
@@ -22,12 +24,12 @@ export default function HeroSection({
   return (
     <section className="relative min-h-screen flex flex-col">
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.5, ease: EASE_ELEGANT }}
         className="absolute inset-0 z-0"
       >
-        <div className="relative w-full h-full bg-gradient-to-b from-[var(--color-primary-light)] to-[var(--color-bg)]">
+        <div className="relative w-full h-full">
           <Image
             src={mainImage}
             alt="메인 웨딩 사진"
@@ -35,54 +37,78 @@ export default function HeroSection({
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/70" />
+          <div className="absolute inset-0 film-grain" />
         </div>
       </motion.div>
 
-      <div className="relative z-10 flex-1 flex flex-col justify-end pb-12 px-6">
+      <div className="relative z-10 flex-1 flex flex-col justify-end pb-16 px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 1, ease: EASE_ELEGANT }}
         >
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl py-8 px-6 border border-white/20 shadow-xl">
-            <p className="text-[11px] tracking-[0.4em] text-white/70 mb-5 font-light">
-              SAVE THE DATE
+          <motion.p
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5, duration: 0.8, ease: EASE_ELEGANT }}
+            className="font-mono text-[10px] tracking-[0.5em] text-white/60 mb-4"
+          >
+            SAVE THE DATE
+          </motion.p>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 1, ease: EASE_ELEGANT }}
+            className="text-white mb-6"
+          >
+            <span className="font-display text-[48px] leading-[1.1] tracking-[-0.02em] block">
+              {groomName}
+            </span>
+            <span className="font-display text-[28px] text-white/60 tracking-wide inline-block my-2">&</span>
+            <span className="font-display text-[48px] leading-[1.1] tracking-[-0.02em] block">
+              {brideName}
+            </span>
+          </motion.h1>
+
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 1, duration: 0.8, ease: EASE_ELEGANT }}
+            className="w-20 h-px bg-white/40 mb-6 origin-left"
+          />
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8, ease: EASE_ELEGANT }}
+            className="space-y-1"
+          >
+            <p className="font-mono text-[11px] tracking-[0.15em] text-white/80">
+              {formatKoreanDate(date)}
             </p>
-            
-            <h1 className="font-[family-name:var(--font-heading)] text-[28px] mb-6 leading-snug">
-              <span className="text-white drop-shadow-sm">{groomName}</span>
-              <span className="text-white/80 mx-3 text-xl align-middle">&</span>
-              <span className="text-white drop-shadow-sm">{brideName}</span>
-            </h1>
-
-            <div className="w-12 h-px bg-white/30 mx-auto mb-5" />
-
-            <div className="text-[13px] text-white/85 tracking-wide">
-              <p className="mb-1.5">{formatKoreanDate(date)}</p>
-              <p className="text-white/65">{venue}</p>
-            </div>
-          </div>
+            <p className="text-[13px] text-white/60">{venue}</p>
+          </motion.div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.5 }}
-          className="mt-8 flex justify-center"
+          transition={{ delay: 1.5, duration: 0.5 }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2"
         >
           <motion.div
             animate={{ y: [0, 6, 0] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
           >
             <svg
-              width="24"
-              height="24"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="var(--color-text-muted)"
-              strokeWidth="1.5"
+              stroke="rgba(255,255,255,0.5)"
+              strokeWidth="1"
               strokeLinecap="round"
               strokeLinejoin="round"
             >

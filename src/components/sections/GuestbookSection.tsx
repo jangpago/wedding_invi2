@@ -18,6 +18,8 @@ import {
 import { simpleHash } from '@/lib/utils';
 import type { GuestbookEntry, GuestbookFormData } from '@/types';
 
+const EASE_ELEGANT: [number, number, number, number] = [0.22, 1, 0.36, 1];
+
 export default function GuestbookSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -115,61 +117,43 @@ export default function GuestbookSection() {
 
   const displayEntries = entries.length > 0 ? entries : sampleEntries;
 
-  const getCardRotation = (index: number) => {
-    const rotations = [-1.2, 0.8, -0.5, 1, -0.8, 0.5];
-    return rotations[index % rotations.length];
-  };
-
-  const cardColors = [
-    'bg-[#FFF9E6]',
-    'bg-[#F0F7EE]', 
-    'bg-[#FFF0F0]',
-    'bg-[#F0F4FF]',
-    'bg-[#FFF5EB]',
-    'bg-[#F5F0FF]',
-  ];
-
   return (
     <section ref={ref} className="py-20 px-6 bg-[var(--color-bg)] paper-texture">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: EASE_ELEGANT }}
       >
         <div className="text-center mb-10">
           <p className="section-title mb-3">GUESTBOOK</p>
-          <h2 className="font-[family-name:var(--font-heading)] mb-2">방명록</h2>
-          <p className="text-sm text-[var(--color-text-light)]">
+          <h2 className="font-display text-[28px] tracking-[-0.01em] mb-2">방명록</h2>
+          <p className="text-[13px] text-[var(--color-text-muted)]">
             축하의 마음을 남겨주세요
           </p>
         </div>
 
-        <div className="space-y-4 mb-6 max-h-96 overflow-y-auto hide-scrollbar">
+        <div className="space-y-4 mb-8 max-h-[420px] overflow-y-auto hide-scrollbar">
           {displayEntries.length === 0 ? (
-            <div className="text-center py-12 text-[var(--color-text-muted)]">
-              <MessageSquare size={32} className="mx-auto mb-3 opacity-50" />
-              <p className="text-sm">첫 번째 축하 메시지를 남겨주세요!</p>
+            <div className="text-center py-16 text-[var(--color-text-muted)]">
+              <MessageSquare size={28} strokeWidth={1} className="mx-auto mb-4 opacity-40" />
+              <p className="font-mono text-[11px] tracking-wide">첫 번째 메시지를 남겨주세요</p>
             </div>
           ) : (
             displayEntries.map((entry, index) => (
               <motion.div
                 key={entry.id}
-                initial={{ opacity: 0, y: 15, rotate: 0 }}
-                animate={{ opacity: 1, y: 0, rotate: getCardRotation(index) }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className={`${cardColors[index % cardColors.length]} rounded-sm p-5 shadow-md relative`}
-                style={{
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.06)',
-                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.05, duration: 0.5, ease: EASE_ELEGANT }}
+                className="bg-white p-5 shadow-editorial relative"
               >
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-3 bg-[var(--color-primary-light)]/60 rounded-sm" />
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <span className="text-[10px] text-[var(--color-primary)] tracking-wider">FROM</span>
-                    <p className="text-sm font-medium mt-0.5">{entry.name}</p>
+                    <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-primary)] mb-1">FROM</p>
+                    <p className="text-[14px] font-medium">{entry.name}</p>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-[var(--color-text-muted)]">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[10px] text-[var(--color-text-muted)]">
                       {formatDate(entry.createdAt)}
                     </span>
                     {'passwordHash' in entry && (
@@ -180,12 +164,12 @@ export default function GuestbookSection() {
                         }}
                         className="text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
                       >
-                        <Trash2 size={12} />
+                        <Trash2 size={14} strokeWidth={1.5} />
                       </button>
                     )}
                   </div>
                 </div>
-                <p className="text-sm text-[var(--color-text)] whitespace-pre-line leading-relaxed">
+                <p className="text-[14px] text-[var(--color-text-light)] whitespace-pre-line leading-relaxed">
                   {entry.message}
                 </p>
               </motion.div>
@@ -194,15 +178,14 @@ export default function GuestbookSection() {
         </div>
 
         <motion.button
-          whileTap={{ scale: 0.97 }}
-          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => {
             setShowWriteModal(true);
             setError(null);
           }}
-          className="w-full py-4 bg-[var(--color-primary)] text-white rounded-xl font-medium shadow-lg shadow-[var(--color-primary)]/20 transition-all"
+          className="w-full py-4 bg-[var(--color-primary)] text-white font-mono text-[13px] tracking-wide shadow-editorial transition-all hover:bg-[var(--color-primary-dark)]"
         >
-          축하 메시지 남기기
+          WRITE MESSAGE
         </motion.button>
       </motion.div>
 
@@ -214,58 +197,65 @@ export default function GuestbookSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowWriteModal(false)}
-              className="fixed inset-0 bg-black/40 z-50"
+              className="fixed inset-0 bg-black/50 z-50"
             />
             <motion.div
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 100 }}
-              className="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-white rounded-t-3xl z-50 p-6 pb-8"
+              transition={{ ease: EASE_ELEGANT }}
+              className="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-white z-50 p-6 pb-8"
             >
-              <div className="flex justify-between items-center mb-6">
-                <h3 className="font-medium text-lg">축하 메시지 작성</h3>
+              <div className="flex justify-between items-center mb-8">
+                <h3 className="font-display text-[20px]">축하 메시지 작성</h3>
                 <button onClick={() => setShowWriteModal(false)}>
-                  <X size={24} className="text-[var(--color-text-light)]" />
+                  <X size={24} strokeWidth={1.5} className="text-[var(--color-text-light)]" />
                 </button>
               </div>
 
               <div className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="이름"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] rounded-xl text-sm outline-none focus:ring-2 focus:ring-[var(--color-primary)]/30"
-                  maxLength={20}
-                />
-                <textarea
-                  placeholder="축하 메시지를 입력해주세요"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={4}
-                  className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] rounded-xl text-sm outline-none resize-none focus:ring-2 focus:ring-[var(--color-primary)]/30"
-                  maxLength={200}
-                />
-                <input
-                  type="password"
-                  placeholder="비밀번호 (삭제 시 필요)"
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] rounded-xl text-sm outline-none focus:ring-2 focus:ring-[var(--color-primary)]/30"
-                  maxLength={20}
-                />
+                <div>
+                  <label className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">NAME</label>
+                  <input
+                    type="text"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[14px] outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+                    maxLength={20}
+                  />
+                </div>
+                <div>
+                  <label className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">MESSAGE</label>
+                  <textarea
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    rows={4}
+                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[14px] outline-none resize-none focus:ring-1 focus:ring-[var(--color-primary)]"
+                    maxLength={200}
+                  />
+                </div>
+                <div>
+                  <label className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">PASSWORD</label>
+                  <input
+                    type="password"
+                    value={formData.password}
+                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[14px] outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+                    maxLength={20}
+                  />
+                </div>
 
                 {error && (
-                  <p className="text-[var(--color-accent)] text-sm text-center">{error}</p>
+                  <p className="text-[var(--color-accent)] text-[13px] text-center">{error}</p>
                 )}
 
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-[var(--color-primary)] text-white rounded-xl font-medium disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-4 bg-[var(--color-primary)] text-white font-mono text-[13px] tracking-wide disabled:opacity-50 flex items-center justify-center gap-2 transition-all hover:bg-[var(--color-primary-dark)]"
                 >
-                  {isSubmitting && <Loader2 size={18} className="animate-spin" />}
-                  {isSubmitting ? '등록 중...' : '등록하기'}
+                  {isSubmitting && <Loader2 size={16} className="animate-spin" />}
+                  {isSubmitting ? 'SENDING...' : 'SUBMIT'}
                 </button>
               </div>
             </motion.div>
@@ -285,44 +275,47 @@ export default function GuestbookSection() {
                 setDeletePassword('');
                 setError(null);
               }}
-              className="fixed inset-0 bg-black/40 z-50"
+              className="fixed inset-0 bg-black/50 z-50"
             />
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[320px] bg-white rounded-2xl z-50 p-6"
+              transition={{ ease: EASE_ELEGANT }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[320px] bg-white z-50 p-6"
             >
-              <h3 className="font-medium text-center mb-4">메시지 삭제</h3>
-              <input
-                type="password"
-                placeholder="비밀번호를 입력해주세요"
-                value={deletePassword}
-                onChange={(e) => {
-                  setDeletePassword(e.target.value);
-                  setError(null);
-                }}
-                className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] rounded-xl text-sm outline-none mb-3"
-              />
+              <h3 className="font-display text-[18px] text-center mb-6">메시지 삭제</h3>
+              <div>
+                <label className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">PASSWORD</label>
+                <input
+                  type="password"
+                  value={deletePassword}
+                  onChange={(e) => {
+                    setDeletePassword(e.target.value);
+                    setError(null);
+                  }}
+                  className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[14px] outline-none mb-4"
+                />
+              </div>
               {error && (
-                <p className="text-[var(--color-accent)] text-sm text-center mb-3">{error}</p>
+                <p className="text-[var(--color-accent)] text-[13px] text-center mb-4">{error}</p>
               )}
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <button
                   onClick={() => {
                     setShowDeleteModal(null);
                     setDeletePassword('');
                     setError(null);
                   }}
-                  className="flex-1 py-3 bg-[var(--color-bg-secondary)] rounded-xl text-sm"
+                  className="flex-1 py-3 bg-[var(--color-bg-secondary)] font-mono text-[12px] tracking-wide"
                 >
-                  취소
+                  CANCEL
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="flex-1 py-3 bg-[var(--color-primary-dark)] text-white rounded-xl text-sm"
+                  className="flex-1 py-3 bg-[var(--color-primary-dark)] text-white font-mono text-[12px] tracking-wide"
                 >
-                  삭제
+                  DELETE
                 </button>
               </div>
             </motion.div>

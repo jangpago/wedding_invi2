@@ -1,26 +1,40 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #91785D;
-  --color-primary-light: #C9B8A8;
-  --color-primary-dark: #6B5A45;
-  --color-accent: #C9A7A7;
-  --color-accent-light: #E8D5D5;
-  --color-bg: #FAF8F5;
-  --color-bg-secondary: #F3EFE9;
-  --color-text: #3D2B1F;
-  --color-text-light: #6B5A4D;
-  --color-text-muted: #9A8B7A;
-  --color-border: #E5DDD3;
-  --color-groom: #5A6B5A;
-  --color-bride: #A67B7B;
-  --color-success: #91785D;
+  /* Color System - Refined Warm Tones */
+  --color-primary: #8B7355;
+  --color-primary-light: #C4B5A0;
+  --color-primary-dark: #5C4D3C;
+  --color-accent: #B89B9B;
+  --color-accent-light: #E5D5D5;
+  --color-accent-dark: #8B7070;
+  --color-bg: #FAF9F7;
+  --color-bg-warm: #F7F4F0;
+  --color-bg-secondary: #F0EDE8;
+  --color-text: #2D2420;
+  --color-text-light: #5C534D;
+  --color-text-muted: #8C8279;
+  --color-border: #E8E2DA;
+  --color-groom: #4A5C4A;
+  --color-bride: #9B7070;
+  --color-success: #8B7355;
   
-  --font-heading: 'Noto Serif KR', serif;
+  /* Typography System */
+  --font-display: var(--font-display), 'Cormorant Garamond', serif;
+  --font-heading: var(--font-noto-serif), 'Noto Serif KR', serif;
+  --font-mono: var(--font-mono), 'IBM Plex Mono', monospace;
   --font-body: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   
-  /* Premium animation easing */
+  /* Animation Easing */
   --ease-elegant: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Shadows - Layered Editorial Style */
+  --shadow-sm: 0 1px 2px rgba(45, 36, 32, 0.04), 0 2px 4px rgba(45, 36, 32, 0.02);
+  --shadow-md: 0 2px 4px rgba(45, 36, 32, 0.03), 0 4px 8px rgba(45, 36, 32, 0.04), 0 8px 16px rgba(45, 36, 32, 0.03);
+  --shadow-lg: 0 4px 8px rgba(45, 36, 32, 0.02), 0 8px 16px rgba(45, 36, 32, 0.04), 0 16px 32px rgba(45, 36, 32, 0.06);
+  --shadow-xl: 0 8px 16px rgba(45, 36, 32, 0.03), 0 16px 32px rgba(45, 36, 32, 0.05), 0 32px 64px rgba(45, 36, 32, 0.07);
 }
 
 @theme inline {
@@ -68,11 +82,32 @@ button {
 }
 
 .section-title {
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  letter-spacing: 0.35em;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--color-text-muted);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.shadow-editorial {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-editorial-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+.text-balance {
+  text-wrap: balance;
 }
 
 .paper-texture {
@@ -84,9 +119,24 @@ button {
   position: absolute;
   inset: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
+  opacity: 0.025;
   pointer-events: none;
   z-index: 1;
+}
+
+.film-grain {
+  position: relative;
+}
+
+.film-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: overlay;
 }
 
 .hide-scrollbar {
@@ -109,6 +159,26 @@ button {
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealText {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
@@ -118,10 +188,31 @@ button {
   }
 }
 
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
 .animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation: fadeIn 0.8s var(--ease-elegant) forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 1s var(--ease-elegant) forwards;
+}
+
+.animate-reveal-text {
+  animation: revealText 1.2s var(--ease-elegant) forwards;
 }
 
 .animate-pulse-slow {
   animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
 }

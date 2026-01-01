@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Link2, Check, MessageCircle } from 'lucide-react';
+import { Link2, Check, Share2 } from 'lucide-react';
 import { copyToClipboard } from '@/lib/utils';
 
 interface ShareSectionProps {
@@ -12,6 +12,8 @@ interface ShareSectionProps {
   date: Date;
   venue: string;
 }
+
+const EASE_ELEGANT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export default function ShareSection({
   groomName,
@@ -40,17 +42,18 @@ export default function ShareSection({
     }
   };
 
-  const handleKakaoShare = () => {
-    const shareText = `${groomName} ♥ ${brideName} 결혼합니다\n\n${formatDate(date)}\n${venue}\n\n청첩장 보기: ${typeof window !== 'undefined' ? window.location.href : ''}`;
+  const handleShare = () => {
+    const shareText = `${groomName} ♥ ${brideName} 결혼합니다\n\n${formatDate(date)}\n${venue}`;
+    const url = typeof window !== 'undefined' ? window.location.href : '';
     
     if (navigator.share) {
       navigator.share({
         title: `${groomName} ♥ ${brideName} 결혼합니다`,
         text: shareText,
-        url: typeof window !== 'undefined' ? window.location.href : '',
+        url: url,
       });
     } else {
-      window.open(`https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`, '_blank');
+      window.open(`https://sharer.kakao.com/talk/friends/picker/link?url=${encodeURIComponent(url)}`, '_blank');
     }
   };
 
@@ -59,37 +62,37 @@ export default function ShareSection({
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: EASE_ELEGANT }}
       >
         <div className="text-center mb-10">
           <p className="section-title mb-3">SHARE</p>
-          <h2 className="font-[family-name:var(--font-heading)]">공유하기</h2>
+          <h2 className="font-display text-[28px] tracking-[-0.01em]">공유하기</h2>
         </div>
 
         <div className="flex gap-3">
           <motion.button
-            whileTap={{ scale: 0.95 }}
-            onClick={handleKakaoShare}
-            className="flex-1 flex items-center justify-center gap-2 py-4 bg-[var(--color-accent)] rounded-xl font-medium text-[var(--color-text)]"
+            whileTap={{ scale: 0.98 }}
+            onClick={handleShare}
+            className="flex-1 flex items-center justify-center gap-3 py-4 bg-[var(--color-accent)] text-[var(--color-text)] font-mono text-[12px] tracking-wide transition-all hover:bg-[var(--color-accent-dark)]"
           >
-            <MessageCircle size={20} />
-            <span>카카오톡</span>
+            <Share2 size={18} strokeWidth={1.5} />
+            <span>SHARE</span>
           </motion.button>
 
           <motion.button
-            whileTap={{ scale: 0.95 }}
+            whileTap={{ scale: 0.98 }}
             onClick={handleCopyLink}
-            className="flex-1 flex items-center justify-center gap-2 py-4 bg-white border border-[var(--color-border)] rounded-xl font-medium"
+            className="flex-1 flex items-center justify-center gap-3 py-4 bg-white border border-[var(--color-border)] font-mono text-[12px] tracking-wide transition-all hover:bg-[var(--color-bg-secondary)]"
           >
             {copied ? (
               <>
-                <Check size={20} className="text-[var(--color-primary)]" />
-                <span className="text-[var(--color-primary)]">복사됨</span>
+                <Check size={18} strokeWidth={1.5} className="text-[var(--color-primary)]" />
+                <span className="text-[var(--color-primary)]">COPIED</span>
               </>
             ) : (
               <>
-                <Link2 size={20} />
-                <span>링크 복사</span>
+                <Link2 size={18} strokeWidth={1.5} />
+                <span>COPY LINK</span>
               </>
             )}
           </motion.button>

@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { MapPin, Phone, Navigation, Car, Train, Bus } from 'lucide-react';
+import { MapPin, Phone, Car, Train, Bus } from 'lucide-react';
 import { copyToClipboard } from '@/lib/utils';
 
 interface MapSectionProps {
@@ -21,6 +21,8 @@ interface MapSectionProps {
     };
   };
 }
+
+const EASE_ELEGANT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export default function MapSection({ venue }: MapSectionProps) {
   const ref = useRef(null);
@@ -51,9 +53,8 @@ export default function MapSection({ venue }: MapSectionProps) {
 
   const transportationItems = [
     { icon: Train, label: '지하철', content: venue.transportation.subway },
-    { icon: Bus, label: '버스', content: venue.transportation.bus },
+    { icon: Bus, label: '버스 / 셔틀', content: venue.transportation.bus },
     { icon: Car, label: '자가용', content: venue.transportation.car },
-    { icon: Navigation, label: '기타', content: venue.transportation.etc },
   ].filter(item => item.content);
 
   return (
@@ -61,73 +62,81 @@ export default function MapSection({ venue }: MapSectionProps) {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, ease: EASE_ELEGANT }}
       >
         <div className="text-center mb-10">
           <p className="section-title mb-3">LOCATION</p>
-          <h2 className="font-[family-name:var(--font-heading)] mb-3">오시는 길</h2>
-          <p className="text-[var(--color-text)] font-medium">{venue.name}</p>
-          <p className="text-sm text-[var(--color-text-light)]">{venue.hall}</p>
+          <h2 className="font-display text-[28px] tracking-[-0.01em] mb-2">오시는 길</h2>
+          <p className="text-[var(--color-text)] font-display text-[18px]">{venue.name}</p>
+          <p className="text-[13px] text-[var(--color-text-muted)] font-mono tracking-wide">{venue.hall}</p>
         </div>
 
-        <div className="w-full h-64 rounded-2xl bg-[var(--color-bg-secondary)] mb-4 overflow-hidden flex items-center justify-center">
+        <div className="w-full aspect-[4/3] bg-[var(--color-bg-secondary)] mb-4 overflow-hidden flex items-center justify-center border border-[var(--color-border)]">
           <div className="text-center text-[var(--color-text-muted)]">
-            <MapPin size={32} className="mx-auto mb-2 opacity-50" />
-            <p className="text-sm">지도 영역</p>
-            <p className="text-xs">(카카오맵 API 키 필요)</p>
+            <MapPin size={28} strokeWidth={1} className="mx-auto mb-3 opacity-40" />
+            <p className="font-mono text-[11px] tracking-wide">MAP AREA</p>
+            <p className="text-[10px] mt-1 opacity-60">(카카오맵 API 연동 필요)</p>
           </div>
         </div>
 
-        <div className="bg-[var(--color-bg-secondary)] rounded-2xl p-4 mb-4">
-          <div className="flex items-start gap-3 mb-3">
-            <MapPin size={18} className="text-[var(--color-primary)] mt-0.5 flex-shrink-0" />
+        <div className="bg-white p-5 mb-4 shadow-editorial">
+          <div className="flex items-start gap-4 mb-4 pb-4 border-b border-[var(--color-border)]">
+            <MapPin size={18} strokeWidth={1.5} className="text-[var(--color-primary)] mt-0.5 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-sm">{venue.address}</p>
+              <p className="text-[14px] leading-relaxed">{venue.address}</p>
               <button
                 onClick={handleCopyAddress}
-                className="text-xs text-[var(--color-primary)] mt-1"
+                className="font-mono text-[11px] tracking-wide text-[var(--color-primary)] mt-2 hover:underline"
               >
-                {copied ? '복사됨!' : '주소 복사'}
+                {copied ? 'COPIED!' : 'COPY ADDRESS'}
               </button>
             </div>
           </div>
-          <div className="flex items-center gap-3">
-            <Phone size={18} className="text-[var(--color-primary)] flex-shrink-0" />
-            <a href={`tel:${venue.phone}`} className="text-sm text-[var(--color-text)]">
-              {venue.phone}
-            </a>
-          </div>
+          {venue.phone && (
+            <div className="flex items-center gap-4">
+              <Phone size={18} strokeWidth={1.5} className="text-[var(--color-primary)] flex-shrink-0" />
+              <a href={`tel:${venue.phone}`} className="text-[14px] text-[var(--color-text)]">
+                {venue.phone}
+              </a>
+            </div>
+          )}
         </div>
 
-        <div className="grid grid-cols-2 gap-2 mb-6">
+        <div className="grid grid-cols-2 gap-3 mb-8">
           <button
             onClick={openNaverMap}
-            className="py-3 bg-[var(--color-primary)] text-white text-sm rounded-xl transition-transform active:scale-95"
+            className="py-4 bg-[var(--color-primary)] text-white text-[13px] font-mono tracking-wide transition-all active:scale-[0.98] hover:bg-[var(--color-primary-dark)]"
           >
-            네이버지도
+            NAVER MAP
           </button>
           <button
             onClick={openKakaoMap}
-            className="py-3 bg-[var(--color-accent)] text-[var(--color-text)] text-sm rounded-xl transition-transform active:scale-95"
+            className="py-4 bg-[var(--color-accent)] text-[var(--color-text)] text-[13px] font-mono tracking-wide transition-all active:scale-[0.98] hover:bg-[var(--color-accent-dark)]"
           >
-            카카오맵
+            KAKAO MAP
           </button>
         </div>
 
         {transportationItems.length > 0 && (
-          <div className="space-y-4">
+          <div className="space-y-5">
             {transportationItems.map((item, index) => (
-              <div key={index} className="flex gap-3">
-                <div className="w-8 h-8 rounded-full bg-[var(--color-bg-secondary)] flex items-center justify-center flex-shrink-0">
-                  <item.icon size={16} className="text-[var(--color-primary)]" />
+              <motion.div 
+                key={index} 
+                className="flex gap-4"
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.3 + index * 0.1, duration: 0.6, ease: EASE_ELEGANT }}
+              >
+                <div className="w-10 h-10 bg-[var(--color-bg-secondary)] flex items-center justify-center flex-shrink-0">
+                  <item.icon size={18} strokeWidth={1.5} className="text-[var(--color-primary)]" />
                 </div>
-                <div>
-                  <p className="text-sm font-medium mb-1">{item.label}</p>
-                  <p className="text-sm text-[var(--color-text-light)] whitespace-pre-line">
+                <div className="flex-1">
+                  <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] mb-1">{item.label.toUpperCase()}</p>
+                  <p className="text-[13px] text-[var(--color-text-light)] leading-relaxed whitespace-pre-line">
                     {item.content}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         )}

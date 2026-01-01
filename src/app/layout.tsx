@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Serif_KR } from "next/font/google";
+import { Noto_Serif_KR, Cormorant_Garamond, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { weddingData } from "@/config/wedding";
 
@@ -7,6 +7,20 @@ const notoSerifKR = Noto_Serif_KR({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-noto-serif",
+  display: "swap",
+});
+
+const cormorantGaramond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["300", "400", "500"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -53,7 +67,7 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
         />
       </head>
-      <body className={`${notoSerifKR.variable} antialiased`}>
+      <body className={`${notoSerifKR.variable} ${cormorantGaramond.variable} ${ibmPlexMono.variable} antialiased`}>
         <main className="min-h-screen max-w-[430px] mx-auto bg-[var(--color-bg)] shadow-xl">
           {children}
         </main>
