@@ -2,9 +2,22 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { MapPin, Phone, Car, Train, Bus } from 'lucide-react';
 import { copyToClipboard } from '@/lib/utils';
+
+declare global {
+  interface Window {
+    kakao: {
+      maps: {
+        load: (callback: () => void) => void;
+        LatLng: new (lat: number, lng: number) => unknown;
+        Map: new (container: HTMLElement, options: { center: unknown; level: number }) => unknown;
+        Marker: new (options: { position: unknown; map: unknown }) => unknown;
+      };
+    };
+  }
+}
 
 interface MapSectionProps {
   venue: {
@@ -26,8 +39,40 @@ const EASE_ELEGANT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export default function MapSection({ venue }: MapSectionProps) {
   const ref = useRef(null);
+  const mapRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [copied, setCopied] = useState(false);
+  const [mapLoaded, setMapLoaded] = useState(false);
+
+  useEffect(() => {
+    const kakaoMapApiKey = process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY;
+    if (!kakaoMapApiKey || !mapRef.current) return;
+
+    const initializeMap = () => {
+      if (!mapRef.current) return;
+      const coords = new window.kakao.maps.LatLng(venue.coordinates.lat, venue.coordinates.lng);
+      const map = new window.kakao.maps.Map(mapRef.current, {
+        center: coords,
+        level: 3,
+      });
+      new window.kakao.maps.Marker({
+        position: coords,
+        map: map,
+      });
+      setMapLoaded(true);
+    };
+
+    if (window.kakao?.maps) {
+      window.kakao.maps.load(initializeMap);
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapApiKey}&autoload=false`;
+    script.async = true;
+    script.onload = () => window.kakao.maps.load(initializeMap);
+    document.head.appendChild(script);
+  }, [venue.coordinates.lat, venue.coordinates.lng]);
 
   const handleCopyAddress = async () => {
     const success = await copyToClipboard(venue.address);
@@ -71,12 +116,16 @@ export default function MapSection({ venue }: MapSectionProps) {
           <p className="text-[14px] text-[var(--color-text-muted)] font-mono tracking-wide">{venue.hall}</p>
         </div>
 
-        <div className="w-full aspect-[4/3] bg-[var(--color-bg-secondary)] mb-4 overflow-hidden flex items-center justify-center border border-[var(--color-border)]">
-          <div className="text-center text-[var(--color-text-muted)]">
-            <MapPin size={28} strokeWidth={1} className="mx-auto mb-3 opacity-40" />
-            <p className="font-mono text-[11px] tracking-wide">MAP AREA</p>
-            <p className="text-[11px] mt-1 opacity-60">(카카오맵 API 연동 필요)</p>
-          </div>
+        <div className="w-full aspect-[4/3] bg-[var(--color-bg-secondary)] mb-4 overflow-hidden border border-[var(--color-border)] relative">
+          <div ref={mapRef} className="w-full h-full" />
+          {!mapLoaded && (
+            <div className="absolute inset-0 flex items-center justify-center text-[var(--color-text-muted)]">
+              <div className="text-center">
+                <MapPin size={28} strokeWidth={1} className="mx-auto mb-3 opacity-40" />
+                <p className="font-mono text-[11px] tracking-wide">지도를 불러오는 중...</p>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="bg-white p-5 mb-4 shadow-editorial">
