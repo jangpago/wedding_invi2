@@ -88,8 +88,8 @@ export default function GreetingSection({
         <motion.div variants={itemVariants} className="text-center">
           <div className="inline-flex items-center gap-6 text-sm">
             <div className="text-right">
-              <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] mb-2">
-                GROOM
+              <p className="text-[12px] tracking-[0.1em] text-[var(--color-groom)] mb-2">
+                신랑
               </p>
               <p className="text-[var(--color-text-light)] text-[14px] mb-1">
                 {groomParents.father} · {groomParents.mother}
@@ -101,8 +101,8 @@ export default function GreetingSection({
             <div className="w-px h-16 bg-[var(--color-border)]" />
             
             <div className="text-left">
-              <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] mb-2">
-                BRIDE
+              <p className="text-[12px] tracking-[0.1em] text-[var(--color-bride)] mb-2">
+                신부
               </p>
               <p className="text-[var(--color-text-light)] text-[14px] mb-1">
                 {brideParents.father} · {brideParents.mother}
