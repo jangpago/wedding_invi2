@@ -61,7 +61,7 @@ export default function GreetingSection({
       >
         <motion.div variants={itemVariants} className="text-center mb-10">
           <p className="section-title mb-4">INVITATION</p>
-          <h2 className="font-display text-[28px] leading-[1.3] tracking-[-0.01em] text-[var(--color-text)]">
+          <h2 className="font-display text-[30px] leading-[1.3] tracking-[-0.01em] text-[var(--color-text)]">
             {title}
           </h2>
         </motion.div>
@@ -75,7 +75,7 @@ export default function GreetingSection({
           variants={itemVariants}
           className="mb-12 text-center"
         >
-          <p className="font-[family-name:var(--font-heading)] text-[15px] leading-[2.4] text-[var(--color-text-light)] whitespace-pre-line text-balance">
+          <p className="font-[family-name:var(--font-heading)] text-[16px] leading-[2.4] text-[var(--color-text-light)] whitespace-pre-line text-balance">
             {message}
           </p>
         </motion.div>
@@ -88,27 +88,27 @@ export default function GreetingSection({
         <motion.div variants={itemVariants} className="text-center">
           <div className="inline-flex items-center gap-6 text-sm">
             <div className="text-right">
-              <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] mb-2">
+              <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] mb-2">
                 GROOM
               </p>
-              <p className="text-[var(--color-text-light)] text-[13px] mb-1">
+              <p className="text-[var(--color-text-light)] text-[14px] mb-1">
                 {groomParents.father} · {groomParents.mother}
-                <span className="text-[var(--color-text-muted)] ml-1 text-[12px]">의 아들</span>
+                <span className="text-[var(--color-text-muted)] ml-1 text-[13px]">의 아들</span>
               </p>
-              <p className="font-display text-[20px] text-[var(--color-groom)]">{groomName}</p>
+              <p className="font-display text-[22px] text-[var(--color-groom)]">{groomName}</p>
             </div>
             
             <div className="w-px h-16 bg-[var(--color-border)]" />
             
             <div className="text-left">
-              <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] mb-2">
+              <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] mb-2">
                 BRIDE
               </p>
-              <p className="text-[var(--color-text-light)] text-[13px] mb-1">
+              <p className="text-[var(--color-text-light)] text-[14px] mb-1">
                 {brideParents.father} · {brideParents.mother}
-                <span className="text-[var(--color-text-muted)] ml-1 text-[12px]">의 딸</span>
+                <span className="text-[var(--color-text-muted)] ml-1 text-[13px]">의 딸</span>
               </p>
-              <p className="font-display text-[20px] text-[var(--color-bride)]">{brideName}</p>
+              <p className="font-display text-[22px] text-[var(--color-bride)]">{brideName}</p>
             </div>
           </div>
         </motion.div>

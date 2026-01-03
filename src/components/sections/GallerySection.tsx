@@ -70,7 +70,7 @@ export default function GallerySection({ images }: GallerySectionProps) {
       >
         <div className="text-center mb-10 px-6">
           <p className="section-title mb-3">GALLERY</p>
-          <h2 className="font-display text-[28px] tracking-[-0.01em]">Our Moments</h2>
+          <h2 className="font-display text-[30px] tracking-[-0.01em]">Our Moments</h2>
         </div>
 
         <motion.div

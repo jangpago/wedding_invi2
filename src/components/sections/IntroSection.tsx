@@ -164,7 +164,7 @@ export default function IntroSection({ groomName, brideName, onComplete }: Intro
           >
             <motion.p
               variants={fadeUpVariants}
-              className="font-mono text-[10px] tracking-[0.5em] text-[var(--color-text-muted)] mb-6"
+              className="font-mono text-[11px] tracking-[0.5em] text-[var(--color-text-muted)] mb-6"
             >
               WEDDING INVITATION
             </motion.p>
@@ -175,7 +175,7 @@ export default function IntroSection({ groomName, brideName, onComplete }: Intro
             />
 
             <motion.div variants={fadeUpVariants} className="mb-4">
-              <span className="font-display text-[52px] leading-[1] tracking-[-0.02em] text-[var(--color-text)] block">
+              <span className="font-nanum text-[44px] leading-[1] tracking-[-0.02em] text-[var(--color-text)] block">
                 {groomName}
               </span>
             </motion.div>
@@ -185,7 +185,7 @@ export default function IntroSection({ groomName, brideName, onComplete }: Intro
             </motion.div>
 
             <motion.div variants={fadeUpVariants} className="mb-10">
-              <span className="font-display text-[52px] leading-[1] tracking-[-0.02em] text-[var(--color-text)] block">
+              <span className="font-nanum text-[44px] leading-[1] tracking-[-0.02em] text-[var(--color-text)] block">
                 {brideName}
               </span>
             </motion.div>
@@ -197,7 +197,7 @@ export default function IntroSection({ groomName, brideName, onComplete }: Intro
 
             <motion.p
               variants={fadeUpVariants}
-              className="font-mono text-[10px] tracking-[0.4em] text-[var(--color-text-muted)]"
+              className="font-mono text-[12px] tracking-[0.4em] text-[var(--color-text-muted)]"
             >
               2026. 04. 05
             </motion.p>
@@ -215,7 +215,7 @@ export default function IntroSection({ groomName, brideName, onComplete }: Intro
               className="flex flex-col items-center gap-2"
             >
               <div className="w-px h-6 bg-gradient-to-b from-transparent via-[var(--color-text-muted)] to-transparent" />
-              <span className="font-mono text-[9px] tracking-[0.3em] text-[var(--color-text-muted)]">
+              <span className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-text-muted)]">
                 SCROLL
               </span>
             </motion.div>

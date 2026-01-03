@@ -69,7 +69,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-  font-size: 1.375rem;
+  font-size: 1.875rem;
 }
 
 img {
@@ -83,7 +83,25 @@ button {
 
 .section-title {
   font-family: var(--font-mono);
-  font-size: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+.section-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem; /* 12px */
   font-weight: 400;
   letter-spacing: 0.4em;
   text-transform: uppercase;
@@ -96,6 +114,10 @@ button {
 
 .font-mono {
   font-family: var(--font-mono);
+}
+
+.font-nanum {
+  font-family: var(--font-nanum), 'Nanum Myeongjo', serif;
 }
 
 .shadow-editorial {

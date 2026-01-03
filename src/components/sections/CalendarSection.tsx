@@ -69,8 +69,8 @@ export default function CalendarSection({ date, groomName, brideName }: Calendar
         <motion.div variants={itemVariants} className="text-center mb-8">
           <p className="section-title mb-6">CALENDAR</p>
           
-          <p className="font-mono text-[10px] tracking-[0.4em] text-[var(--color-text-muted)] mb-2">
-            {dayNamesEn[dayOfWeek]}
+          <p className="font-mono text-[11px] tracking-[0.4em] text-[var(--color-text-muted)] mb-2">
+            {dayNames[dayOfWeek]}요일
           </p>
           <motion.p 
             className="font-display text-[100px] leading-none tracking-[-0.03em] text-[var(--color-text)]"
@@ -81,7 +81,7 @@ export default function CalendarSection({ date, groomName, brideName }: Calendar
             {String(targetDay).padStart(2, '0')}
           </motion.p>
           <p className="font-display text-[24px] mt-2 text-[var(--color-text-light)]">
-            {monthNames[month]} {year}
+            {year}년 {month + 1}월
           </p>
         </motion.div>
 
@@ -91,7 +91,7 @@ export default function CalendarSection({ date, groomName, brideName }: Calendar
               {dayNames.map((day, idx) => (
                 <div
                   key={day}
-                  className={`text-[10px] text-center font-mono tracking-wider ${
+                  className={`text-[11px] text-center font-mono tracking-wider ${
                     idx === 0 ? 'text-[var(--color-accent-dark)]' : idx === 6 ? 'text-[var(--color-groom)]' : 'text-[var(--color-text-muted)]'
                   }`}
                 >
@@ -104,7 +104,7 @@ export default function CalendarSection({ date, groomName, brideName }: Calendar
               {days.map((day, idx) => (
                 <div
                   key={idx}
-                  className={`relative aspect-square flex items-center justify-center text-[12px]
+                  className={`relative aspect-square flex items-center justify-center text-[13px]
                     ${day === targetDay ? 'text-white font-medium' : ''}
                     ${idx % 7 === 0 && day !== targetDay ? 'text-[var(--color-accent-dark)]' : ''}
                     ${idx % 7 === 6 && day !== targetDay ? 'text-[var(--color-groom)]' : ''}
@@ -131,21 +131,21 @@ export default function CalendarSection({ date, groomName, brideName }: Calendar
           className="text-center"
         >
           <div className="inline-block px-8 py-5 bg-white shadow-editorial">
-            <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-text-muted)] mb-3">
+            <p className="font-mono text-[11px] tracking-[0.3em] text-[var(--color-text-muted)] mb-3">
               {groomName} & {brideName}
             </p>
             <p className="font-display text-[var(--color-primary)]">
               {dday > 0 ? (
                 <>
                   <span className="text-[36px] tracking-[-0.02em]">{dday}</span>
-                  <span className="text-[14px] ml-2 text-[var(--color-text-light)]">days to go</span>
+                  <span className="text-[15px] ml-2 text-[var(--color-text-light)]">일 남았습니다</span>
                 </>
               ) : dday === 0 ? (
-                <span className="text-[24px]">Today is the day</span>
+                <span className="text-[24px]">오늘이 결혼식입니다</span>
               ) : (
                 <>
                   <span className="text-[36px] tracking-[-0.02em]">{Math.abs(dday)}</span>
-                  <span className="text-[14px] ml-2 text-[var(--color-text-light)]">days ago</span>
+                  <span className="text-[15px] ml-2 text-[var(--color-text-light)]">일 지났습니다</span>
                 </>
               )}
             </p>

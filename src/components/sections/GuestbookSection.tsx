@@ -126,8 +126,8 @@ export default function GuestbookSection() {
       >
         <div className="text-center mb-10">
           <p className="section-title mb-3">GUESTBOOK</p>
-          <h2 className="font-display text-[28px] tracking-[-0.01em] mb-2">방명록</h2>
-          <p className="text-[13px] text-[var(--color-text-muted)]">
+          <h2 className="font-display text-[30px] tracking-[-0.01em] mb-2">방명록</h2>
+          <p className="text-[14px] text-[var(--color-text-muted)]">
             축하의 마음을 남겨주세요
           </p>
         </div>
@@ -149,11 +149,11 @@ export default function GuestbookSection() {
               >
                 <div className="flex justify-between items-start mb-3">
                   <div>
-                    <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-primary)] mb-1">FROM</p>
-                    <p className="text-[14px] font-medium">{entry.name}</p>
+                    <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-primary)] mb-1">FROM</p>
+                    <p className="text-[15px] font-medium">{entry.name}</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-[10px] text-[var(--color-text-muted)]">
+                    <span className="font-mono text-[11px] text-[var(--color-text-muted)]">
                       {formatDate(entry.createdAt)}
                     </span>
                     {'passwordHash' in entry && (
@@ -169,7 +169,7 @@ export default function GuestbookSection() {
                     )}
                   </div>
                 </div>
-                <p className="text-[14px] text-[var(--color-text-light)] whitespace-pre-line leading-relaxed">
+                <p className="text-[15px] text-[var(--color-text-light)] whitespace-pre-line leading-relaxed">
                   {entry.message}
                 </p>
               </motion.div>
@@ -183,7 +183,7 @@ export default function GuestbookSection() {
             setShowWriteModal(true);
             setError(null);
           }}
-          className="w-full py-4 bg-[var(--color-primary)] text-white font-mono text-[13px] tracking-wide shadow-editorial transition-all hover:bg-[var(--color-primary-dark)]"
+          className="w-full py-4 bg-[var(--color-primary)] text-white font-mono text-[14px] tracking-wide shadow-editorial transition-all hover:bg-[var(--color-primary-dark)]"
         >
           WRITE MESSAGE
         </motion.button>
@@ -207,7 +207,7 @@ export default function GuestbookSection() {
               className="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-white z-50 p-6 pb-8"
             >
               <div className="flex justify-between items-center mb-8">
-                <h3 className="font-display text-[20px]">축하 메시지 작성</h3>
+                <h3 className="font-display text-[22px]">축하 메시지 작성</h3>
                 <button onClick={() => setShowWriteModal(false)}>
                   <X size={24} strokeWidth={1.5} className="text-[var(--color-text-light)]" />
                 </button>
@@ -215,32 +215,32 @@ export default function GuestbookSection() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">NAME</label>
+                  <label className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">NAME</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[14px] outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[15px] outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
                     maxLength={20}
                   />
                 </div>
                 <div>
-                  <label className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">MESSAGE</label>
+                  <label className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">MESSAGE</label>
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={4}
-                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[14px] outline-none resize-none focus:ring-1 focus:ring-[var(--color-primary)]"
+                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[15px] outline-none resize-none focus:ring-1 focus:ring-[var(--color-primary)]"
                     maxLength={200}
                   />
                 </div>
                 <div>
-                  <label className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">PASSWORD</label>
+                  <label className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">PASSWORD</label>
                   <input
                     type="password"
                     value={formData.password}
                     onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[14px] outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
+                    className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[15px] outline-none focus:ring-1 focus:ring-[var(--color-primary)]"
                     maxLength={20}
                   />
                 </div>
@@ -252,7 +252,7 @@ export default function GuestbookSection() {
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting}
-                  className="w-full py-4 bg-[var(--color-primary)] text-white font-mono text-[13px] tracking-wide disabled:opacity-50 flex items-center justify-center gap-2 transition-all hover:bg-[var(--color-primary-dark)]"
+                  className="w-full py-4 bg-[var(--color-primary)] text-white font-mono text-[14px] tracking-wide disabled:opacity-50 flex items-center justify-center gap-2 transition-all hover:bg-[var(--color-primary-dark)]"
                 >
                   {isSubmitting && <Loader2 size={16} className="animate-spin" />}
                   {isSubmitting ? 'SENDING...' : 'SUBMIT'}
@@ -284,9 +284,9 @@ export default function GuestbookSection() {
               transition={{ ease: EASE_ELEGANT }}
               className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-[320px] bg-white z-50 p-6"
             >
-              <h3 className="font-display text-[18px] text-center mb-6">메시지 삭제</h3>
+              <h3 className="font-display text-[20px] text-center mb-6">메시지 삭제</h3>
               <div>
-                <label className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">PASSWORD</label>
+                <label className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] block mb-2">PASSWORD</label>
                 <input
                   type="password"
                   value={deletePassword}
@@ -294,7 +294,7 @@ export default function GuestbookSection() {
                     setDeletePassword(e.target.value);
                     setError(null);
                   }}
-                  className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[14px] outline-none mb-4"
+                  className="w-full px-4 py-3 bg-[var(--color-bg-secondary)] text-[15px] outline-none mb-4"
                 />
               </div>
               {error && (
@@ -307,13 +307,13 @@ export default function GuestbookSection() {
                     setDeletePassword('');
                     setError(null);
                   }}
-                  className="flex-1 py-3 bg-[var(--color-bg-secondary)] font-mono text-[12px] tracking-wide"
+                  className="flex-1 py-3 bg-[var(--color-bg-secondary)] font-mono text-[13px] tracking-wide"
                 >
                   CANCEL
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="flex-1 py-3 bg-[var(--color-primary-dark)] text-white font-mono text-[12px] tracking-wide"
+                  className="flex-1 py-3 bg-[var(--color-primary-dark)] text-white font-mono text-[13px] tracking-wide"
                 >
                   DELETE
                 </button>

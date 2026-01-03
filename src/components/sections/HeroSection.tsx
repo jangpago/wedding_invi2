@@ -52,7 +52,7 @@ export default function HeroSection({
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.8, ease: EASE_ELEGANT }}
-            className="font-mono text-[10px] tracking-[0.5em] text-white/60 mb-4"
+            className="font-mono text-[11px] tracking-[0.5em] text-white/60 mb-4"
           >
             SAVE THE DATE
           </motion.p>
@@ -63,11 +63,11 @@ export default function HeroSection({
             transition={{ delay: 0.7, duration: 1, ease: EASE_ELEGANT }}
             className="text-white mb-6"
           >
-            <span className="font-display text-[48px] leading-[1.1] tracking-[-0.02em] block">
+            <span className="font-nanum text-[44px] leading-[1.1] tracking-[-0.02em] block">
               {groomName}
             </span>
             <span className="font-display text-[28px] text-white/60 tracking-wide inline-block my-2">&</span>
-            <span className="font-display text-[48px] leading-[1.1] tracking-[-0.02em] block">
+            <span className="font-nanum text-[44px] leading-[1.1] tracking-[-0.02em] block">
               {brideName}
             </span>
           </motion.h1>
@@ -85,10 +85,10 @@ export default function HeroSection({
             transition={{ delay: 1.2, duration: 0.8, ease: EASE_ELEGANT }}
             className="space-y-1"
           >
-            <p className="font-mono text-[11px] tracking-[0.15em] text-white/80">
+            <p className="font-mono text-[12px] tracking-[0.15em] text-white/80">
               {formatKoreanDate(date)}
             </p>
-            <p className="text-[13px] text-white/60">{venue}</p>
+            <p className="text-[14px] text-white/60">{venue}</p>
           </motion.div>
         </motion.div>
 

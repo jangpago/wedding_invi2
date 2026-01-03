@@ -41,28 +41,23 @@ export default function ContactSection({ groom, bride }: ContactSectionProps) {
   const ContactCard = ({ name, phone, type }: { name: string; phone: string; type: 'groom' | 'bride' }) => (
     <div className="flex items-center justify-between py-5 border-b border-[var(--color-border)] last:border-0">
       <div className="flex items-center gap-4">
-        <div className={`w-12 h-12 flex items-center justify-center text-white text-[11px] font-mono tracking-wider
+        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white text-[13px] tracking-wide
           ${type === 'groom' ? 'bg-[var(--color-groom)]' : 'bg-[var(--color-bride)]'}`}
         >
-          {type === 'groom' ? 'HIM' : 'HER'}
+          {type === 'groom' ? '신랑' : '신부'}
         </div>
-        <div>
-          <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] mb-1">
-            {type === 'groom' ? 'GROOM' : 'BRIDE'}
-          </p>
-          <p className="font-display text-[18px]">{name}</p>
-        </div>
+        <p className="font-display text-[20px]">{name}</p>
       </div>
       <div className="flex gap-2">
         <button
           onClick={() => handleCall(phone)}
-          className="w-11 h-11 flex items-center justify-center bg-[var(--color-bg-secondary)] transition-all active:scale-95 hover:bg-[var(--color-border)]"
+          className="w-11 h-11 rounded-full flex items-center justify-center bg-[var(--color-bg-secondary)] transition-all active:scale-95 hover:bg-[var(--color-border)]"
         >
           <Phone size={18} strokeWidth={1.5} className="text-[var(--color-text)]" />
         </button>
         <button
           onClick={() => handleSms(phone)}
-          className="w-11 h-11 flex items-center justify-center bg-[var(--color-bg-secondary)] transition-all active:scale-95 hover:bg-[var(--color-border)]"
+          className="w-11 h-11 rounded-full flex items-center justify-center bg-[var(--color-bg-secondary)] transition-all active:scale-95 hover:bg-[var(--color-border)]"
         >
           <MessageCircle size={18} strokeWidth={1.5} className="text-[var(--color-text)]" />
         </button>
@@ -79,7 +74,7 @@ export default function ContactSection({ groom, bride }: ContactSectionProps) {
       >
         <div className="text-center mb-10">
           <p className="section-title mb-3">CONTACT</p>
-          <h2 className="font-display text-[28px] tracking-[-0.01em]">연락하기</h2>
+          <h2 className="font-display text-[30px] tracking-[-0.01em]">연락하기</h2>
         </div>
 
         <div className="bg-white p-5 shadow-editorial">
@@ -90,7 +85,7 @@ export default function ContactSection({ groom, bride }: ContactSectionProps) {
         <motion.button
           whileTap={{ scale: 0.98 }}
           onClick={() => setShowParentsModal(true)}
-          className="w-full mt-4 py-4 text-[13px] text-[var(--color-text-light)] border border-[var(--color-border)] bg-white font-mono tracking-wide hover:bg-[var(--color-bg-secondary)] transition-colors"
+          className="w-full mt-4 py-4 text-[14px] text-[var(--color-text-light)] border border-[var(--color-border)] bg-white font-mono tracking-wide hover:bg-[var(--color-bg-secondary)] transition-colors"
         >
           혼주에게 연락하기
         </motion.button>
@@ -114,7 +109,7 @@ export default function ContactSection({ groom, bride }: ContactSectionProps) {
               className="fixed bottom-0 left-0 right-0 max-w-[430px] mx-auto bg-white z-50 p-6 pb-8"
             >
               <div className="flex justify-between items-center mb-8">
-                <h3 className="font-display text-[20px]">혼주에게 연락하기</h3>
+                <h3 className="font-display text-[22px]">혼주에게 연락하기</h3>
                 <button onClick={() => setShowParentsModal(false)}>
                   <X size={24} strokeWidth={1.5} className="text-[var(--color-text-light)]" />
                 </button>
@@ -122,23 +117,23 @@ export default function ContactSection({ groom, bride }: ContactSectionProps) {
 
               <div className="space-y-8">
                 <div>
-                  <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-groom)] mb-4">GROOM&apos;S FAMILY</p>
+                  <p className="text-[13px] tracking-[0.15em] text-[var(--color-groom)] mb-4 font-medium">신랑측</p>
                   <div className="space-y-3">
                     {[groom.parents.father, groom.parents.mother].map((parent) => (
                       <div key={parent.name} className="flex items-center justify-between py-2">
-                        <span className="text-[14px]">{parent.name}</span>
+                        <span className="text-[15px]">{parent.name}</span>
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleCall(parent.phone)}
-                            className="px-5 py-2 text-[12px] bg-[var(--color-bg-secondary)] font-mono tracking-wide"
+                            className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-bg-secondary)] transition-all active:scale-95"
                           >
-                            CALL
+                            <Phone size={16} strokeWidth={1.5} className="text-[var(--color-text)]" />
                           </button>
                           <button
                             onClick={() => handleSms(parent.phone)}
-                            className="px-5 py-2 text-[12px] bg-[var(--color-bg-secondary)] font-mono tracking-wide"
+                            className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-bg-secondary)] transition-all active:scale-95"
                           >
-                            SMS
+                            <MessageCircle size={16} strokeWidth={1.5} className="text-[var(--color-text)]" />
                           </button>
                         </div>
                       </div>
@@ -147,23 +142,23 @@ export default function ContactSection({ groom, bride }: ContactSectionProps) {
                 </div>
 
                 <div>
-                  <p className="font-mono text-[10px] tracking-[0.3em] text-[var(--color-bride)] mb-4">BRIDE&apos;S FAMILY</p>
+                  <p className="text-[13px] tracking-[0.15em] text-[var(--color-bride)] mb-4 font-medium">신부측</p>
                   <div className="space-y-3">
                     {[bride.parents.father, bride.parents.mother].map((parent) => (
                       <div key={parent.name} className="flex items-center justify-between py-2">
-                        <span className="text-[14px]">{parent.name}</span>
+                        <span className="text-[15px]">{parent.name}</span>
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleCall(parent.phone)}
-                            className="px-5 py-2 text-[12px] bg-[var(--color-bg-secondary)] font-mono tracking-wide"
+                            className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-bg-secondary)] transition-all active:scale-95"
                           >
-                            CALL
+                            <Phone size={16} strokeWidth={1.5} className="text-[var(--color-text)]" />
                           </button>
                           <button
                             onClick={() => handleSms(parent.phone)}
-                            className="px-5 py-2 text-[12px] bg-[var(--color-bg-secondary)] font-mono tracking-wide"
+                            className="w-10 h-10 rounded-full flex items-center justify-center bg-[var(--color-bg-secondary)] transition-all active:scale-95"
                           >
-                            SMS
+                            <MessageCircle size={16} strokeWidth={1.5} className="text-[var(--color-text)]" />
                           </button>
                         </div>
                       </div>

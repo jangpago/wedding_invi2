@@ -66,16 +66,16 @@ export default function MapSection({ venue }: MapSectionProps) {
       >
         <div className="text-center mb-10">
           <p className="section-title mb-3">LOCATION</p>
-          <h2 className="font-display text-[28px] tracking-[-0.01em] mb-2">오시는 길</h2>
-          <p className="text-[var(--color-text)] font-display text-[18px]">{venue.name}</p>
-          <p className="text-[13px] text-[var(--color-text-muted)] font-mono tracking-wide">{venue.hall}</p>
+          <h2 className="font-display text-[30px] tracking-[-0.01em] mb-2">오시는 길</h2>
+          <p className="text-[var(--color-text)] font-display text-[20px]">{venue.name}</p>
+          <p className="text-[14px] text-[var(--color-text-muted)] font-mono tracking-wide">{venue.hall}</p>
         </div>
 
         <div className="w-full aspect-[4/3] bg-[var(--color-bg-secondary)] mb-4 overflow-hidden flex items-center justify-center border border-[var(--color-border)]">
           <div className="text-center text-[var(--color-text-muted)]">
             <MapPin size={28} strokeWidth={1} className="mx-auto mb-3 opacity-40" />
             <p className="font-mono text-[11px] tracking-wide">MAP AREA</p>
-            <p className="text-[10px] mt-1 opacity-60">(카카오맵 API 연동 필요)</p>
+            <p className="text-[11px] mt-1 opacity-60">(카카오맵 API 연동 필요)</p>
           </div>
         </div>
 
@@ -83,10 +83,10 @@ export default function MapSection({ venue }: MapSectionProps) {
           <div className="flex items-start gap-4 mb-4 pb-4 border-b border-[var(--color-border)]">
             <MapPin size={18} strokeWidth={1.5} className="text-[var(--color-primary)] mt-0.5 flex-shrink-0" />
             <div className="flex-1">
-              <p className="text-[14px] leading-relaxed">{venue.address}</p>
+              <p className="text-[15px] leading-relaxed">{venue.address}</p>
               <button
                 onClick={handleCopyAddress}
-                className="font-mono text-[11px] tracking-wide text-[var(--color-primary)] mt-2 hover:underline"
+                className="font-mono text-[12px] tracking-wide text-[var(--color-primary)] mt-2 hover:underline"
               >
                 {copied ? 'COPIED!' : 'COPY ADDRESS'}
               </button>
@@ -95,7 +95,7 @@ export default function MapSection({ venue }: MapSectionProps) {
           {venue.phone && (
             <div className="flex items-center gap-4">
               <Phone size={18} strokeWidth={1.5} className="text-[var(--color-primary)] flex-shrink-0" />
-              <a href={`tel:${venue.phone}`} className="text-[14px] text-[var(--color-text)]">
+              <a href={`tel:${venue.phone}`} className="text-[15px] text-[var(--color-text)]">
                 {venue.phone}
               </a>
             </div>
@@ -105,13 +105,13 @@ export default function MapSection({ venue }: MapSectionProps) {
         <div className="grid grid-cols-2 gap-3 mb-8">
           <button
             onClick={openNaverMap}
-            className="py-4 bg-[var(--color-primary)] text-white text-[13px] font-mono tracking-wide transition-all active:scale-[0.98] hover:bg-[var(--color-primary-dark)]"
+            className="py-4 bg-[var(--color-primary)] text-white text-[14px] font-mono tracking-wide transition-all active:scale-[0.98] hover:bg-[var(--color-primary-dark)]"
           >
             NAVER MAP
           </button>
           <button
             onClick={openKakaoMap}
-            className="py-4 bg-[var(--color-accent)] text-[var(--color-text)] text-[13px] font-mono tracking-wide transition-all active:scale-[0.98] hover:bg-[var(--color-accent-dark)]"
+            className="py-4 bg-[var(--color-accent)] text-[var(--color-text)] text-[14px] font-mono tracking-wide transition-all active:scale-[0.98] hover:bg-[var(--color-accent-dark)]"
           >
             KAKAO MAP
           </button>
@@ -131,8 +131,8 @@ export default function MapSection({ venue }: MapSectionProps) {
                   <item.icon size={18} strokeWidth={1.5} className="text-[var(--color-primary)]" />
                 </div>
                 <div className="flex-1">
-                  <p className="font-mono text-[10px] tracking-[0.2em] text-[var(--color-text-muted)] mb-1">{item.label.toUpperCase()}</p>
-                  <p className="text-[13px] text-[var(--color-text-light)] leading-relaxed whitespace-pre-line">
+                  <p className="font-mono text-[11px] tracking-[0.2em] text-[var(--color-text-muted)] mb-1">{item.label.toUpperCase()}</p>
+                  <p className="text-[14px] text-[var(--color-text-light)] leading-relaxed whitespace-pre-line">
                     {item.content}
                   </p>
                 </div>
