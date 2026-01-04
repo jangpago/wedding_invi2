@@ -56,14 +56,14 @@ export const weddingData: WeddingData = {
     },
     parentsAccounts: [
       {
-        bank: '하나은행',
-        accountNumber: '110-313-810473',
-        holder: '김수빈',
+        bank: '국민은행',
+        accountNumber: '046802-04-276054',
+        holder: '김현민',
       },
       {
-        bank: '', // TODO: 신부측 어머니 계좌 정보 입력 필요
-        accountNumber: '',
-        holder: '',
+        bank: '농협은행',
+        accountNumber: '1222-02-009682',
+        holder: '신희정',
       },
     ],
   },
