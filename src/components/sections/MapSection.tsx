@@ -16,6 +16,13 @@ declare global {
         Marker: new (options: { position: unknown; map: unknown }) => unknown;
       };
     };
+    Kakao: {
+      init: (appKey: string) => void;
+      isInitialized: () => boolean;
+      Share: {
+        sendDefault: (settings: Record<string, unknown>) => void;
+      };
+    };
   }
 }
 
@@ -53,7 +60,7 @@ export default function MapSection({ venue }: MapSectionProps) {
       const coords = new window.kakao.maps.LatLng(venue.coordinates.lat, venue.coordinates.lng);
       const map = new window.kakao.maps.Map(mapRef.current, {
         center: coords,
-        level: 3,
+        level: 5,
       });
       new window.kakao.maps.Marker({
         position: coords,

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Serif_KR, Cormorant_Garamond, IBM_Plex_Mono, Nanum_Myeongjo } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { weddingData } from "@/config/wedding";
 
@@ -75,6 +76,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`${notoSerifKR.variable} ${cormorantGaramond.variable} ${ibmPlexMono.variable} ${nanumMyeongjo.variable} antialiased`}>
+        <Script
+          src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+          integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4kyatih8vCpeYf4q"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <main className="min-h-screen max-w-[430px] mx-auto bg-[var(--color-bg)] shadow-xl">
           {children}
         </main>
