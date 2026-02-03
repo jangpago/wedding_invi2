@@ -37,14 +37,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: weddingData.meta.title,
     description: weddingData.meta.description,
-    images: [{ url: '/mainimage/IMG_5638.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/images/og-image.jpg', width: 800, height: 1200 }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: weddingData.meta.title,
     description: weddingData.meta.description,
-    images: ['/mainimage/IMG_5638.jpg'],
+    images: [{ url: '/images/og-image.jpg', width: 800, height: 1200 }],
   },
   robots: {
     index: false,
