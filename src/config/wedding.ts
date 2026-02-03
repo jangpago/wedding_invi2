@@ -23,14 +23,14 @@ export const weddingData: WeddingData = {
     },
     parentsAccounts: [
       {
-        bank: '신한은행',
-        accountNumber: '110-313-810473',
-        holder: '장준기',
+        bank: '기업은행',
+        accountNumber: '396-033878-01-016',
+        holder: '장복식',
       },
       {
         bank: '신한은행',
-        accountNumber: '110-313-810473',
-        holder: '장준기',
+        accountNumber: '110-224-014260',
+        holder: '이순희',
       },
     ],
   },
@@ -51,7 +51,7 @@ export const weddingData: WeddingData = {
     },
     account: {
       bank: '하나은행',
-      accountNumber: '110-313-810473',
+      accountNumber: '850-910106-44707',
       holder: '김수빈',
     },
     parentsAccounts: [
@@ -76,8 +76,8 @@ export const weddingData: WeddingData = {
       address: '서울 강남구 논현로 742 2층 루클라비 더화이트',
       phone: '',
       coordinates: {
-        lat: 37.5178,
-        lng: 127.0345,
+        lat: 37.51828566776124,
+        lng: 127.02922496237763,
       },
       transportation: {
         subway: '7호선 학동역 8번 출구에서 도보로 5분 거리에 위치해 있습니다.',
