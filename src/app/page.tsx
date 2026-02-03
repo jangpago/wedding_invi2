@@ -34,6 +34,7 @@ export default function Home() {
         <IntroSection
           groomName={weddingData.groom.name}
           brideName={weddingData.bride.name}
+          time={weddingData.wedding.time}
           onComplete={handleIntroComplete}
         />
       )}
@@ -43,6 +44,7 @@ export default function Home() {
           groomName={weddingData.groom.name}
           brideName={weddingData.bride.name}
           date={weddingData.wedding.date}
+          time={weddingData.wedding.time}
           venue={weddingData.wedding.venue.name}
         />
 

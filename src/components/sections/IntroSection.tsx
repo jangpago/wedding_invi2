@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 interface IntroSectionProps {
   groomName: string;
   brideName: string;
+  time: string;
   onComplete: () => void;
 }
 
@@ -81,7 +82,7 @@ function FloatingPetal({ petal }: { petal: Petal }) {
   );
 }
 
-export default function IntroSection({ groomName, brideName, onComplete }: IntroSectionProps) {
+export default function IntroSection({ groomName, brideName, time, onComplete }: IntroSectionProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [showContent, setShowContent] = useState(false);
 
@@ -200,6 +201,12 @@ export default function IntroSection({ groomName, brideName, onComplete }: Intro
               className="font-mono text-[12px] tracking-[0.4em] text-[var(--color-text-muted)]"
             >
               2026. 04. 05
+            </motion.p>
+            <motion.p
+              variants={fadeUpVariants}
+              className="font-mono text-[12px] tracking-[0.2em] text-[var(--color-text-muted)] mt-1"
+            >
+              {time}
             </motion.p>
           </motion.div>
 

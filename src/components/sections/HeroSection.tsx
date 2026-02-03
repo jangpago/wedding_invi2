@@ -8,6 +8,7 @@ interface HeroSectionProps {
   groomName: string;
   brideName: string;
   date: Date;
+  time: string;
   venue: string;
   mainImage?: string;
 }
@@ -18,6 +19,7 @@ export default function HeroSection({
   groomName,
   brideName,
   date,
+  time,
   venue,
   mainImage = '/mainimage/IMG_5638.jpg',
 }: HeroSectionProps) {
@@ -86,7 +88,7 @@ export default function HeroSection({
             className="space-y-1"
           >
             <p className="font-mono text-[12px] tracking-[0.15em] text-white/80">
-              {formatKoreanDate(date)}
+              {formatKoreanDate(date)} {time}
             </p>
             <p className="text-[14px] text-white/60">{venue}</p>
           </motion.div>
