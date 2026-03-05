@@ -164,7 +164,7 @@ export default function GallerySection({ images }: GallerySectionProps) {
               className="w-full h-full gallery-swiper"
             >
               {displayImages.map((image, index) => (
-                <SwiperSlide key={index} className="!flex items-center justify-center">
+                <SwiperSlide key={index} className="!flex items-center justify-center overflow-hidden">
                   <div className="swiper-zoom-container">
                     <img
                       src={image.src}
