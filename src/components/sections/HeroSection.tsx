@@ -17,7 +17,7 @@ export default function HeroSection({
   brideName,
   date,
   venue,
-  mainImage = '/mainimage/IMG_5638.jpg',
+  mainImage = '/images/main.jpg',
 }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex flex-col">

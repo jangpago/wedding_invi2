@@ -1,92 +1,107 @@
 import { WeddingData } from '@/types';
 
 export const weddingData: WeddingData = {
+  // ──────────────────────────────────────────────
+  // 🤵 신랑 정보
+  // ──────────────────────────────────────────────
   groom: {
-    name: '장준기',
-    phone: '010-5641-5514',
+    name: '김민준',
+    phone: '010-1234-5678',
     parents: {
       father: {
-        name: '장복식',
-        phone: '010-9405-5114',
+        name: '김철수',
+        phone: '010-1111-2222',
         relation: '아버지',
       },
       mother: {
-        name: '이순희',
-        phone: '010-9495-5004',
+        name: '박영희',
+        phone: '010-3333-4444',
         relation: '어머니',
       },
     },
     account: {
-      bank: '신한은행',
-      accountNumber: '110-313-810473',
-      holder: '장준기',
+      bank: '카카오뱅크',
+      accountNumber: '3333-01-1234567',
+      holder: '김민준',
     },
     parentsAccounts: [
       {
-        bank: '신한은행',
-        accountNumber: '110-313-810473',
-        holder: '장준기',
+        bank: '국민은행',
+        accountNumber: '123456-78-901234',
+        holder: '김철수',
       },
       {
-        bank: '신한은행',
-        accountNumber: '110-313-810473',
-        holder: '장준기',
+        bank: '농협은행',
+        accountNumber: '301-1234-5678-91',
+        holder: '박영희',
       },
     ],
   },
+
+  // ──────────────────────────────────────────────
+  // 👰 신부 정보
+  // ──────────────────────────────────────────────
   bride: {
-    name: '김수빈',
-    phone: '010-4618-8975',
+    name: '이서연',
+    phone: '010-5678-1234',
     parents: {
       father: {
-        name: '김현민',
-        phone: '010-4618-8975',
+        name: '이영수',
+        phone: '010-5555-6666',
         relation: '아버지',
       },
       mother: {
-        name: '', // TODO: 신부측 어머니 정보 입력 필요
-        phone: '',
+        name: '최미경',
+        phone: '010-7777-8888',
         relation: '어머니',
       },
     },
     account: {
       bank: '하나은행',
-      accountNumber: '110-313-810473',
-      holder: '김수빈',
+      accountNumber: '123-456789-01234',
+      holder: '이서연',
     },
     parentsAccounts: [
       {
-        bank: '하나은행',
-        accountNumber: '110-313-810473',
-        holder: '김수빈',
+        bank: '신한은행',
+        accountNumber: '110-123-456789',
+        holder: '이영수',
       },
       {
-        bank: '', // TODO: 신부측 어머니 계좌 정보 입력 필요
-        accountNumber: '',
-        holder: '',
+        bank: '우리은행',
+        accountNumber: '1002-123-456789',
+        holder: '최미경',
       },
     ],
   },
+
+  // ──────────────────────────────────────────────
+  // 💒 결혼식 정보
+  // ──────────────────────────────────────────────
   wedding: {
-    date: new Date('2026-04-05T12:30:00'),
-    time: '오후 12시 30분',
+    date: new Date('2026-06-20T13:00:00'),
+    time: '오후 1시',
     venue: {
-      name: '루클라비 더화이트',
-      hall: '2층',
-      address: '서울 강남구 논현로 742 2층 루클라비 더화이트',
+      name: '더 라움',
+      hall: '그랜드볼룸',
+      address: '서울 강남구 역삼로 219',
       phone: '',
       coordinates: {
-        lat: 37.5178,
-        lng: 127.0345,
+        lat: 37.4967,
+        lng: 127.0382,
       },
       transportation: {
-        subway: '7호선 학동역 8번 출구에서 도보로 5분 거리에 위치해 있습니다.',
-        bus: '셔틀버스는 학동역 8번 출구, 신사역 1번 출구에서 상시 운행 됩니다.',
-        car: '서울 강남구 논현로 742 2층 루클라비더화이트',
+        subway: '2호선 역삼역 3번 출구에서 도보로 5분 거리에 위치해 있습니다.',
+        bus: '역삼역 정류장 하차 후 도보 5분',
+        car: '서울 강남구 역삼로 219 더 라움',
         etc: '',
       },
     },
   },
+
+  // ──────────────────────────────────────────────
+  // 💌 인사말
+  // ──────────────────────────────────────────────
   greeting: {
     title: '소중한 분들을 초대합니다',
     message: `서로 다른 길을 걸어온 저희가
@@ -98,29 +113,29 @@ export const weddingData: WeddingData = {
 귀한 걸음 하시어
 축복해 주시면 감사하겠습니다.`,
   },
-  gallery: [
-    { src: '/images/IMG_4197.jpg', alt: '웨딩 사진 1' },
-    { src: '/images/IMG_4758.jpg', alt: '웨딩 사진 2' },
-    { src: '/images/IMG_4911.jpg', alt: '웨딩 사진 3' },
-    { src: '/images/IMG_5239.jpg', alt: '웨딩 사진 4' },
-    { src: '/images/IMG_5283.jpg', alt: '웨딩 사진 5' },
-    { src: '/images/IMG_5601.jpg', alt: '웨딩 사진 6' },
-    { src: '/images/IMG_5841.jpg', alt: '웨딩 사진 7' },
-    { src: '/images/IMG_5968.jpg', alt: '웨딩 사진 8' },
-    { src: '/images/IMG_6163.jpg', alt: '웨딩 사진 9' },
-    { src: '/images/IMG_7328.jpg', alt: '웨딩 사진 10' },
-    { src: '/images/IMG_7342.jpg', alt: '웨딩 사진 11' },
-    { src: '/images/IMG_7493.jpg', alt: '웨딩 사진 12' },
-    { src: '/images/IMG_7704.jpg', alt: '웨딩 사진 13' },
-    { src: '/images/IMG_7853.jpg', alt: '웨딩 사진 14' },
-  ],
+
+  // ──────────────────────────────────────────────
+  // 📸 갤러리
+  // public/images/gallery/ 폴더에 사진을 넣고 아래처럼 추가하세요
+  // { src: '/images/gallery/photo1.jpg', alt: '웨딩 사진 1' },
+  // { src: '/images/gallery/photo2.jpg', alt: '웨딩 사진 2' },
+  // ──────────────────────────────────────────────
+  gallery: [],
+
+  // ──────────────────────────────────────────────
+  // 🎬 동영상 (선택사항)
+  // ──────────────────────────────────────────────
   video: {
-    url: '/videos/wedding-video.mp4',
-    thumbnail: '/images/video-thumbnail.jpg',
+    url: '',
+    thumbnail: '',
   },
+
+  // ──────────────────────────────────────────────
+  // 🔖 메타 정보 (카카오톡 공유 시 표시)
+  // ──────────────────────────────────────────────
   meta: {
-    title: '장준기 ♥ 김수빈 결혼합니다',
-    description: '2026년 4월 5일 일요일 오후 12시 30분, 루클라비 더화이트',
+    title: '김민준 ♥ 이서연 결혼합니다',
+    description: '2026년 6월 20일 토요일 오후 1시, 더 라움',
     ogImage: '/images/og-image.jpg',
   },
 };
