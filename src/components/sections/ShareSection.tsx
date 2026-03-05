@@ -15,6 +15,7 @@ interface ShareSectionProps {
 
 const KAKAO_APP_KEY = 'adc120281530091ebcf438a608843c74';
 const SITE_URL = 'https://kim-and-jang-wedding-invitation.vercel.app';
+const SHARE_IMAGE_PATH = '/images/QuickShare_2602221518/IMG_0027.jpg';
 const EASE_ELEGANT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export default function ShareSection({
@@ -77,7 +78,7 @@ export default function ShareSection({
       content: {
         title,
         description,
-        imageUrl: `${SITE_URL}/images/og-image.jpg`,
+        imageUrl: `${SITE_URL}${SHARE_IMAGE_PATH}`,
         imageWidth: 800,
         imageHeight: 1200,
         link: {

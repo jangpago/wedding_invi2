@@ -21,7 +21,7 @@ export default function HeroSection({
   date,
   time,
   venue,
-  mainImage = '/mainimage/IMG_5638.jpg',
+  mainImage = '/images/QuickShare_2602221518/IMG_0027.jpg',
 }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex flex-col">

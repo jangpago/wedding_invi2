@@ -5,12 +5,13 @@ import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Zoom } from 'swiper/modules';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/zoom';
 
 interface GalleryImage {
   src: string;
@@ -148,8 +149,9 @@ export default function GallerySection({ images }: GallerySectionProps) {
             </button>
 
             <Swiper
-              modules={[Navigation, Pagination]}
+              modules={[Navigation, Pagination, Zoom]}
               initialSlide={selectedIndex}
+              zoom={{ maxRatio: 3 }}
               navigation={{
                 prevEl: '.swiper-button-prev-custom',
                 nextEl: '.swiper-button-next-custom',
@@ -162,16 +164,13 @@ export default function GallerySection({ images }: GallerySectionProps) {
               className="w-full h-full gallery-swiper"
             >
               {displayImages.map((image, index) => (
-                <SwiperSlide key={index} className="flex items-center justify-center">
-                  <div className="relative w-full h-full flex items-center justify-center p-4">
-                    <div className="relative w-full max-h-[80vh] aspect-[3/4]">
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
+                <SwiperSlide key={index} className="!flex items-center justify-center">
+                  <div className="swiper-zoom-container">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="max-w-full max-h-[80vh] object-contain"
+                    />
                   </div>
                 </SwiperSlide>
               ))}
